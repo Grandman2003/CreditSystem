@@ -1,3 +1,11 @@
 package com.example.creditsystem.data.entity;
 
-public class TariffEntity {}
+import org.springframework.data.annotation.Id;
+
+public class TariffEntity {
+    @Id
+    String id;
+    String type;
+    String interestRate;
+
+}

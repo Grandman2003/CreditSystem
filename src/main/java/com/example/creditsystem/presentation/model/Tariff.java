@@ -1,3 +1,5 @@
 package com.example.creditsystem.presentation.model;
 
-public record Tariff(String userId,String tariffId) {}
+import java.util.UUID;
+
+public record Tariff(String userId, UUID tariffId) {}

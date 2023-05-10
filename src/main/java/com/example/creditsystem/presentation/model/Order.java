@@ -1,3 +1,4 @@
 package com.example.creditsystem.presentation.model;
 
-public record Order(String userId, String orderId) {}
+import java.util.UUID;
+public record Order(String userId, UUID orderId) {}
