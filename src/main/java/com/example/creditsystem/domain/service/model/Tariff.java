@@ -1,4 +1,4 @@
-package com.example.creditsystem.presentation.model;
+package com.example.creditsystem.domain.service.model;
 
 import java.util.UUID;
 

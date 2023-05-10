@@ -1,3 +1,8 @@
 package com.example.creditsystem.data.entity;
 
-public class OrderEntity {}
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table
+public class OrderEntity {
+
+}

@@ -3,27 +3,26 @@ package com.example.creditsystem.data.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
+import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 
 @Configuration
+@EnableJdbcRepositories
 @RequiredArgsConstructor
-public class DatabaseConfiguration {
-    private static final String URL = "jdbc:mysql://localhost:3306/credit_system";
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
-
+public class DatabaseConfiguration  extends AbstractJdbcConfiguration {
     @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setUrl(URL);
-        driverManagerDataSource.setDriverClassName(DRIVER);
-        return driverManagerDataSource;
+    TransactionManager transactionManager(DataSource dataSource){
+        return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean
-    public JdbcTemplate provideJdbcTemplate(DataSource dataSource){
-        return new JdbcTemplate(dataSource);
+    NamedParameterJdbcOperations provideJdbcTemplate(DataSource dataSource){
+        return new NamedParameterJdbcTemplate(dataSource);
     }
 }

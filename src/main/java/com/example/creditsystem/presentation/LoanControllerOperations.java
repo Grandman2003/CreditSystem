@@ -1,8 +1,8 @@
 package com.example.creditsystem.presentation;
 
-import com.example.creditsystem.presentation.model.Order;
-import com.example.creditsystem.presentation.model.ServiceAnswer;
-import com.example.creditsystem.presentation.model.Tariff;
+import com.example.creditsystem.domain.service.model.Order;
+import com.example.creditsystem.domain.service.model.ServiceAnswer;
+import com.example.creditsystem.domain.service.model.Tariff;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +15,6 @@ public interface LoanControllerOperations {
     ResponseEntity<ServiceAnswer> makeOrder(@RequestBody Tariff tariff);
     @GetMapping("/getStatusOrder")
     ResponseEntity<ServiceAnswer> orderStatus(@RequestParam String orderId);
-
     @DeleteMapping("/deleteOrder")
     ResponseEntity<ServiceAnswer> deleteOrder(@RequestBody Order order);
 }
