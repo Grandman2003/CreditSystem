@@ -20,7 +20,7 @@ public class TariffServiceImplementation implements TariffService {
         try{
             return new ServiceAnswer.Success<>(tariffRepository.findAll());
         } catch (Exception e){
-            val error = ServiceError.ORDER_IMPOSSIBLE_TO_DELETE;
+            val error = ServiceError.TARIFF_NOT_FOUND;
             return new ServiceAnswer.Error(error.getCode(), error.getMessage());
         }
     }
