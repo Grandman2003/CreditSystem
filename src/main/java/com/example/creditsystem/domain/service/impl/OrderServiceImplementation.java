@@ -5,6 +5,7 @@ import com.example.creditsystem.domain.service.OrderService;
 import com.example.creditsystem.domain.service.model.ServiceAnswer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.stereotype.Service;
 
 @Service

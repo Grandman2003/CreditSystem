@@ -1,5 +1,7 @@
 package com.example.creditsystem.data.config;
 
+import com.example.creditsystem.domain.repository.OrderRepository;
+import com.example.creditsystem.domain.repository.TariffRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +15,9 @@ import org.springframework.transaction.TransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJdbcRepositories
+@EnableJdbcRepositories(
+        basePackageClasses = {OrderRepository.class, TariffRepository.class}
+)
 @RequiredArgsConstructor
 public class DatabaseConfiguration  extends AbstractJdbcConfiguration {
     @Bean
