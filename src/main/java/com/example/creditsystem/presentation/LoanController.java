@@ -10,6 +10,8 @@ import lombok.val;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class LoanController implements LoanControllerOperations {
@@ -30,8 +32,8 @@ public class LoanController implements LoanControllerOperations {
 
     @Override
     public ResponseEntity<ServiceAnswer> makeOrder(Tariff tariff) {
-        val order =  orderService.makeOrder();
-        if(order instanceof ServiceAnswer.Success<?>){
+        val order =  orderService.makeOrder(tariff);
+        if (order instanceof ServiceAnswer.Success<?>) {
             return  ResponseEntity.ok(order);
         } else {
             return ResponseEntity
@@ -42,11 +44,25 @@ public class LoanController implements LoanControllerOperations {
 
     @Override
     public ResponseEntity<ServiceAnswer> orderStatus(String orderId) {
-        return null;
+        val order = orderService.getOrderByUuid(UUID.fromString(orderId));
+        if (order instanceof ServiceAnswer.Success<?>) {
+            return  ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity
+                    .internalServerError()
+                    .body(order);
+        }
     }
 
     @Override
     public ResponseEntity<ServiceAnswer> deleteOrder(Order order) {
-        return null;
+        val orderAnswer  = orderService.deleteOrder(order);
+        if (orderAnswer instanceof ServiceAnswer.Success<?>) {
+            return  ResponseEntity.ok(orderAnswer);
+        } else {
+            return ResponseEntity
+                    .internalServerError()
+                    .body(orderAnswer);
+        }
     }
 }
