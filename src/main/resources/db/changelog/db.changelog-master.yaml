@@ -1,0 +1,110 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: root
+      changes:
+        - createTable:
+            tableName: tariff
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_tariff
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: interest_rate
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: type
+                  value: CONSUMER
+              - column:
+                  name: interest_rate
+                  value: 5-12%
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: type
+                  value: COMMERCIAL
+              - column:
+                  name: interest_rate
+                  value: 6-24%
+        - insert:
+            tableName: tariff
+            columns:
+              - column:
+                  name: type
+                  value: MORTGAGE
+              - column:
+                  name: interest_rate
+                  value: 2-30%
+        - createTable:
+            tableName: loan_order
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_loan_order
+                    nullable: false
+              - column:
+                  name: order_id
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tariff_id
+                  type: BIGINT
+                  constraints:
+                    references: tariff(id)
+                    foreignKeyName: fk_tariff
+                    unique: true
+                    nullable: false
+              - column:
+                  name: credit_rating
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_insert
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time_update
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+      rollback:
+        - delete:
+            tableName: tariff
+        - delete:
+            tableName: loan_order

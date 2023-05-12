@@ -1,6 +1,7 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306
+        url: jdbc:mysql://localhost:3306/credit_system
         username: root
         password: admin
-        driver-class-name: com.mysql.jdbc.Driver
+        generate-unique-name: false
+        name: credit_system
